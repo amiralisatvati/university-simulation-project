@@ -1,0 +1,327 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  persian,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{XB Niloofar}
+\fi
+%% Support for zero-width non-joiner characters.
+\makeatletter
+\def\zerowidthnonjoiner{%
+  % Prevent ligatures and adjust kerning, but still support hyphenating.
+  \texorpdfstring{%
+    \TextOrMath{\nobreak\discretionary{-}{}{\kern.03em}%
+      \ifvmode\else\nobreak\hskip\z@skip\fi}{}%
+  }{}%
+}
+\makeatother
+\ifPDFTeX
+  \DeclareUnicodeCharacter{200C}{\zerowidthnonjoiner}
+\else
+  \catcode`^^^^200c=\active
+  \protected\def ^^^^200c{\zerowidthnonjoiner}
+\fi
+%% End of ZWNJ support
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+\ifPDFTeX
+\else
+\babelfont{rm}[]{XB Niloofar}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={ازمون های شبیه~ سازی خی~ کرو ارتقام},
+  pdfauthor={Amirali Satvati},
+  pdflang={fa},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{ازمون های شبیه~ سازی خی~ کرو ارتقام}
+\author{Amirali Satvati}
+\date{2025-10-24}
+
+\begin{document}
+\maketitle
+
+\section{تولید داده‌های
+اولیه}\label{ux62aux648ux644ux6ccux62f-ux62fux627ux62fux647ux647ux627ux6cc-ux627ux648ux644ux6ccux647}
+
+\latin
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{209}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{runif}\NormalTok{(n, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\persian
+
+\section{آزمون نیکویی برازش خی-دو
+(Chi-squared)}\label{ux622ux632ux645ux648ux646-ux646ux6ccux6a9ux648ux6ccux6cc-ux628ux631ux627ux632ux634-ux62eux6cc-ux62fux648-chi-squared}
+
+\latin
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fk }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data )\{}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(data)}
+\NormalTok{  k}\OtherTok{=}\FunctionTok{round}\NormalTok{(}\FloatTok{3.33}\SpecialCharTok{*}\FunctionTok{log}\NormalTok{(n)}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
+\NormalTok{  tol }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\SpecialCharTok{/}\NormalTok{k)}
+\NormalTok{  oi}\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(}\FunctionTok{cut}\NormalTok{(data, }\AttributeTok{breaks =}\NormalTok{ tol, }\AttributeTok{include.lowest =} \ConstantTok{TRUE}\NormalTok{))}
+\NormalTok{  ei }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{/}\NormalTok{k, k)}
+  \FunctionTok{chisq.test}\NormalTok{(}\AttributeTok{x =}\NormalTok{ oi, }\AttributeTok{p =}\NormalTok{ ei)}
+  
+\NormalTok{\}}
+\FunctionTok{fk}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\persian\latin
+
+\begin{verbatim}
+## 
+##  Chi-squared test for given probabilities
+## 
+## data:  oi
+## X-squared = 10.4, df = 15, p-value = 0.7939
+\end{verbatim}
+
+\persian
+
+\textbf{نتیجه‌گیری آزمون \(\chi^2\):}
+
+نتیجه: چون **\(p\)-value (0.7939) \textgreater{}
+0.05\(** است، ما دلیلی برای رد کردن فرضیه صفر (\)H\_0\$) نداریم.
+
+\textbf{X-squared = 10.4}: این مقدار آماره \(\chi^2\) (میزان کل اختلاف)
+است. با توجه به درجه آزادی، این عدد پایین محسوب می‌شود، که نشان می‌دهد
+اختلاف کمی بین داده‌های مشاهده‌شده (oi) و داده‌های مورد انتظار شما وجود
+داشته است.
+
+\section{آزمون کولموگروف-اسمیرنوف (K-S
+Test)}\label{ux622ux632ux645ux648ux646-ux6a9ux648ux644ux645ux648ux6afux631ux648ux641-ux627ux633ux645ux6ccux631ux646ux648ux641-k-s-test}
+
+\latin
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ks }\OtherTok{\textless{}{-}} \FunctionTok{ks.test}\NormalTok{(data, }\StringTok{"punif"}\NormalTok{)}
+\NormalTok{ks}
+\end{Highlighting}
+\end{Shaded}
+
+\persian\latin
+
+\begin{verbatim}
+## 
+##  Asymptotic one-sample Kolmogorov-Smirnov test
+## 
+## data:  data
+## D = 0.11124, p-value = 0.1683
+## alternative hypothesis: two-sided
+\end{verbatim}
+
+\persian
+
+وقتی \(p\)-value بزرگتر از \(\alpha\) (مثلاً ۰.۰۵) باشد، ما فرضیه صفر
+(\(H_0\)) را رد نمی‌کنیم. از آنجایی که ما \(H_0\) را رد نکردیم، نتیجه
+می‌گیریم که شواهد کافی مبنی بر یکنواخت نبودن داده‌ها وجود ندارد.
+
+\section{محاسبه دستی آماره D
+(K-S)}\label{ux645ux62dux627ux633ux628ux647-ux62fux633ux62aux6cc-ux622ux645ux627ux631ux647-d-k-s}
+
+\latin
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dman }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(data)\{}
+\NormalTok{  data}\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(data)}
+\NormalTok{  n }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(data)}
+\NormalTok{  i }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{  data}
+\NormalTok{  Dp }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{((i}\SpecialCharTok{/}\NormalTok{n) }\SpecialCharTok{{-}}\NormalTok{ data)}
+\NormalTok{  Dp}
+  
+\NormalTok{  Dm }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(data }\SpecialCharTok{{-}}\NormalTok{ ((i}\DecValTok{{-}1}\NormalTok{)}\SpecialCharTok{/}\NormalTok{n)) }\CommentTok{\# خطا اینجا بود: یک پرانتز بسته اضافه شد}
+\NormalTok{  Dm}
+  
+\NormalTok{  D\_manual }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(Dp, Dm)}
+\NormalTok{  D\_manual}
+\NormalTok{\}}
+
+\FunctionTok{dman}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\persian\latin
+
+\begin{verbatim}
+## [1] 0.1112383
+\end{verbatim}
+
+\persian
+
+مقدار D = 0.11124 یعنی در بدترین حالت، توزیع داده‌های شما با توزیع
+یکنواخت ایده‌آل ۱۱.۱۲٪ اختلاف داشته است.
+
+\section{آزمون پوکر (Poker
+Test)}\label{ux622ux632ux645ux648ux646-ux67eux648ux6a9ux631-poker-test}
+
+\latin
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+
+\NormalTok{data1 }\OtherTok{\textless{}{-}} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%05d"}\NormalTok{, }\FunctionTok{sample}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\DecValTok{99999}\NormalTok{, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{))}
+
+\NormalTok{poker }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(num\_str) \{}
+  
+\NormalTok{  digits }\OtherTok{\textless{}{-}} \FunctionTok{strsplit}\NormalTok{(num\_str, }\StringTok{""}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+  
+\NormalTok{  digit\_counts }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(digits)}
+  
+\NormalTok{  counts }\OtherTok{\textless{}{-}} \FunctionTok{as.vector}\NormalTok{(digit\_counts)}
+  
+\NormalTok{  sorted\_counts }\OtherTok{\textless{}{-}} \FunctionTok{sort}\NormalTok{(counts, }\AttributeTok{decreasing =} \ConstantTok{TRUE}\NormalTok{)}
+  
+\NormalTok{  key }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(sorted\_counts, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+  
+  \ControlFlowTok{if}\NormalTok{ (key }\SpecialCharTok{==} \StringTok{"11111"}\NormalTok{) \{}
+    \FunctionTok{return}\NormalTok{(}\StringTok{"5 Distinct"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (key }\SpecialCharTok{==} \StringTok{"2111"}\NormalTok{) \{}
+    \FunctionTok{return}\NormalTok{(}\StringTok{"1 Pair"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (key }\SpecialCharTok{==} \StringTok{"221"}\NormalTok{) \{}
+    \FunctionTok{return}\NormalTok{(}\StringTok{"2 Pairs"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (key }\SpecialCharTok{==} \StringTok{"311"}\NormalTok{) \{}
+    \FunctionTok{return}\NormalTok{(}\StringTok{"3 of a Kind"}\NormalTok{)}
+\NormalTok{  \} }\ControlFlowTok{else}\NormalTok{ \{}
+    
+    \FunctionTok{return}\NormalTok{(}\StringTok{"Other"}\NormalTok{)}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(data1, poker)}
+
+\NormalTok{category\_order }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"5 Distinct"}\NormalTok{, }\StringTok{"1 Pair"}\NormalTok{, }\StringTok{"2 Pairs"}\NormalTok{, }\StringTok{"3 of a Kind"}\NormalTok{, }\StringTok{"Other"}\NormalTok{)}
+\NormalTok{all\_categories\_factor }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(x, }\AttributeTok{levels =}\NormalTok{ category\_order)}
+\NormalTok{observed\_counts }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(all\_categories\_factor)}
+
+\FunctionTok{print}\NormalTok{(observed\_counts)}
+\end{Highlighting}
+\end{Shaded}
+
+\persian\latin
+
+\begin{verbatim}
+## all_categories_factor
+##  5 Distinct      1 Pair     2 Pairs 3 of a Kind       Other 
+##          23          53           9          10           5
+\end{verbatim}
+
+\persian
+
+\end{document}

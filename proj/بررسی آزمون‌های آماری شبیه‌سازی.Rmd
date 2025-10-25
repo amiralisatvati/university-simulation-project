@@ -1,0 +1,140 @@
+---
+title: "ازمون های شبیه  سازی خی  کرو ارتقام"
+author: "Amirali Satvati"
+date: "2025-10-24"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    keep_tex: true
+  html_document:
+    css: "mystyle1.css"
+    toc: true            # اضافه کردن فهرست مطالب
+    toc_float: true      # فهرست مطالب شناور
+    number_sections: true # شماره‌گذاری سرفصل‌ها
+    highlight: "zenburn"  # انتخاب تم رنگی برای هایلایت
+    theme: "flatly"      # تم Bootstrap
+    df_print: paged
+editor_options:
+  chunk_output_type: console # تنظیمات ویژه برای اجرای کد
+mainfont: XB Niloofar
+lang: fa
+---
+
+```{r setup, include=FALSE}
+# بارگذاری کتابخانه برای پشتیبانی از فارسی در پی‌دی‌اف
+library(RTLknitr)
+markdown_rtl()
+
+# این چانک تنظیمات کلی فایل را مشخص می‌کند
+knitr::opts_chunk$set(echo = TRUE,digits = 2)
+knitr::knit_hooks$set(inline= function(x) {
+  if(is.numeric(x)) {
+    round(x,2)
+  }
+})
+```
+
+# تولید داده‌های اولیه
+
+```{r data-generation}
+set.seed(209)
+n <- 100
+data <- runif(n, min = 0, max = 1)
+```
+
+# آزمون نیکویی برازش خی-دو (Chi-squared)
+
+```{r chi-squared-test}
+fk <- function(data ){
+  n <- length(data)
+  k=round(3.33*log(n)+1)
+  tol <- seq(0, 1, by = 1/k)
+  oi<- table(cut(data, breaks = tol, include.lowest = TRUE))
+  ei <- rep(1/k, k)
+  chisq.test(x = oi, p = ei)
+  
+}
+fk(data)
+```
+
+**نتیجه‌گیری آزمون $\chi^2$:**
+
+نتیجه: چون **$p$-value (0.7939) > 0.05$** است، ما دلیلی برای رد کردن فرضیه صفر ($H_0$) نداریم.
+
+**X-squared = 10.4**: این مقدار آماره $\chi^2$ (میزان کل اختلاف) است. با توجه به درجه آزادی، این عدد پایین محسوب می‌شود، که نشان می‌دهد اختلاف کمی بین داده‌های مشاهده‌شده (oi) و داده‌های مورد انتظار شما وجود داشته است.
+
+# آزمون کولموگروف-اسمیرنوف (K-S Test)
+
+```{r ks-test}
+ks <- ks.test(data, "punif")
+ks
+```
+
+وقتی $p$-value بزرگتر از $\alpha$ (مثلاً ۰.۰۵) باشد، ما فرضیه صفر ($H_0$) را رد نمی‌کنیم. از آنجایی که ما $H_0$ را رد نکردیم، نتیجه می‌گیریم که شواهد کافی مبنی بر یکنواخت نبودن داده‌ها وجود ندارد.
+
+# محاسبه دستی آماره D (K-S)
+
+```{r ks-manual}
+dman <- function(data){
+  data<- sort(data)
+  n <- length(data)
+  i <- 1:n
+  data
+  Dp <- max((i/n) - data)
+  Dp
+  
+  Dm <- max(data - ((i-1)/n)) # خطا اینجا بود: یک پرانتز بسته اضافه شد
+  Dm
+  
+  D_manual <- max(Dp, Dm)
+  D_manual
+}
+
+dman(data)
+```
+
+مقدار D = 0.11124 یعنی در بدترین حالت، توزیع داده‌های شما با توزیع یکنواخت ایده‌آل ۱۱.۱۲٪ اختلاف داشته است.
+
+# آزمون پوکر (Poker Test)
+
+```{r poker-test}
+set.seed(42)
+n <- 100
+
+data1 <- sprintf("%05d", sample(0:99999, n, replace = TRUE))
+
+poker <- function(num_str) {
+  
+  digits <- strsplit(num_str, "")[[1]]
+  
+  digit_counts <- table(digits)
+  
+  counts <- as.vector(digit_counts)
+  
+  sorted_counts <- sort(counts, decreasing = TRUE)
+  
+  key <- paste(sorted_counts, collapse = "")
+  
+  if (key == "11111") {
+    return("5 Distinct")
+  } else if (key == "2111") {
+    return("1 Pair")
+  } else if (key == "221") {
+    return("2 Pairs")
+  } else if (key == "311") {
+    return("3 of a Kind")
+  } else {
+    
+    return("Other")
+  }
+}
+
+x <- sapply(data1, poker)
+
+category_order <- c("5 Distinct", "1 Pair", "2 Pairs", "3 of a Kind", "Other")
+all_categories_factor <- factor(x, levels = category_order)
+observed_counts <- table(all_categories_factor)
+
+print(observed_counts)
+
+```
